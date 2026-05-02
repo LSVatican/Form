@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Form</title>
+    <link rel="icon" href="/Favicon.png" type="image/x-icon">
+    <script src="https://www.google.com/recaptcha/api.js" async defer></script>
+    
+    <style>
+        body {
+            background-color: #ffeef2;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            margin: 0;
+        }
+
+        .container {
+            background: white;
+            padding: 30px;
+            border-radius: 20px;
+            box-shadow: 0 0 20px rgba(255, 105, 180, 0.3);
+            border: 3px solid #ff69b4; /* Stroke */
+            width: 90%;
+            max-width: 400px;
+            position: relative;
+        }
+
+        h2 {
+            color: #ff1493;
+            text-align: center;
+            text-shadow: 0 0 10px rgba(255, 20, 147, 0.5); /* Glowing */
+        }
+
+        label {
+            color: #ff1493;
+            font-weight: bold;
+            display: block;
+            margin-top: 15px;
+        }
+
+        input, select, textarea {
+            width: 100%;
+            padding: 10px;
+            margin-top: 5px;
+            border: 2px solid #ffb6c1;
+            border-radius: 10px;
+            box-sizing: border-box;
+            outline: none;
+            transition: 0.3s;
+        }
+
+        input:focus, textarea:focus {
+            border-color: #ff1493;
+            box-shadow: 0 0 8px rgba(255, 20, 147, 0.4); /* Glowing focus */
+        }
+
+        /* Submit Button Default (Disabled style) */
+        #submit-btn {
+            width: 100%;
+            padding: 12px;
+            margin-top: 20px;
+            border: none;
+            border-radius: 25px;
+            background-color: #d3d3d3; /* Belum berwarna */
+            color: white;
+            font-weight: bold;
+            cursor: not-allowed;
+            transition: 0.4s;
+        }
+
+        /* Submit Button Active (Pink & Glowing) */
+        #submit-btn.active {
+            background-color: #ff69b4;
+            cursor: pointer;
+            box-shadow: 0 0 15px #ff69b4;
+            border: 2px solid #fff;
+        }
+
+        .watermark {
+            text-align: center;
+            font-size: 12px;
+            color: #ffb6c1;
+            margin-top: 20px;
+            font-style: italic;
+        }
+
+        .g-recaptcha {
+            margin-top: 15px;
+            transform: scale(0.9);
+            transform-origin: 0 0;
+        }
+    </style>
+</head>
+<body>
+
+<div class="container">
+    <h2>Form</h2>
+    <form action="https://formspree.io/f/maqvnkny" method="POST" id="main-form">
+        
+        <label>Nama Lengkap</label>
+        <input type="text" name="nama" required placeholder="Masukkan nama...">
+
+        <label>Email</label>
+        <input type="email" name="email" required placeholder="email@contoh.com">
+
+        <label>Jenis Kelamin</label>
+        <select name="gender">
+            <option value="Laki-laki">Laki-laki</option>
+            <option value="Perempuan">Perempuan</option>
+            <option value="Rahasia">Rahasia</option>
+        </select>
+
+        <label>Pesan</label>
+        <textarea name="pesan" rows="4" required></textarea>
+
+        <div class="g-recaptcha" data-sitekey="6LcSZdUsAAAAAAc5Hvq4Xe0XSGBlLfeTPHGU3g5K" data-callback="imNotARobot"></div>
+
+        <button type="submit" id="submit-btn" disabled>Kirim Pesan</button>
+    </form>
+
+    <div class="watermark">LS Vatican</div>
+</div>
+
+<script>
+    // Fungsi dipanggil saat reCAPTCHA dicentang
+    function imNotARobot() {
+        const btn = document.getElementById('submit-btn');
+        btn.disabled = false;
+        btn.classList.add('active');
+    }
+</script>
+
+</body>
+</html>
